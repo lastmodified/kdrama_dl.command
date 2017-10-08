@@ -13,7 +13,7 @@ You need to already have ``ffmpeg`` installed. If you haven't, here's the [DMG i
 cd "$HOME" && \
 curl -S -L --retry 2 -o 'ffmpeg.zip' \
 'http://www.ffmpegmac.net/resources/Lion_Mountain_Lion_Mavericks_Yosemite_El-Captain_15.05.2017.zip' && \
-unzip ffmpeg.zip && \
+unzip ffmpeg.zip && rm ffmpeg.zip && \
 ./ffmpeg -version
 ```
 

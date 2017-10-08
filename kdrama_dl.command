@@ -18,21 +18,6 @@
 # along with kdrama_dl.command.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-#
-# 1. Download and save this with the .command extension, example kdrama_dl.command
-# 2. Double-click the saved .command file to launch from Finder
-# 3. The files would be saved in the Downloads folder of your home folder if
-#    launched from Finder. If executed manually from Terminal, it will be in the 
-#    "Downloads" folder in the current path.
-#
-# 2017.08.27 (Screencast http://imgur.com/a/6yhZE)
-# - Add color to Terminal output
-# - Don't clear screen after user input
-# - Support existing ffmpeg installation (no binary in script folder)
-# - Auto retry
-# - Don't close script immediately so that user has a chance to view messages
-#
-
 # Current working dir
 CWD=`pwd`
 DOWNLOAD_FOLDER="$CWD/downloads"

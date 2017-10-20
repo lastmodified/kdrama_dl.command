@@ -30,7 +30,7 @@ C_WARNING='\033[93m'
 C_OKBLUE='\033[94m'
 C_OKGREEN='\033[92m'
 
-HOSTNAME='kdrama.anontpp.com'
+HOSTNAME='goplay.anontpp.com'
 # HOSTNAME='kdrama.armsasuncion.com'
 
 function wait_ack {
@@ -101,7 +101,7 @@ function do_download {
     if [ "$ext" = 'mkv' ]
     then
         # show progress stats so there is feedback on what's happening
-        "$FFMPEG_PATH" -loglevel "$FFMPEG_LOGLEVEL" -stats -timeout 10000000 -rw_timeout 10000000 -reconnect 1 -reconnect_streamed 1 -reconnect_streamed 1 -i "$video_dl" -i "$sub_dl" -c copy -bsf:a aac_adtstoasc -f 'matroska' "$video_file"
+        "$FFMPEG_PATH" -loglevel "$FFMPEG_LOGLEVEL" -stats -timeout 10000000 -reconnect 1 -reconnect_streamed 1 -reconnect_streamed 1 -i "$video_dl" -i "$sub_dl" -c copy -bsf:a aac_adtstoasc -f 'matroska' "$video_file"
     fi
 
     if [ "$ext" = 'mp4' ]
@@ -109,7 +109,7 @@ function do_download {
         # Generate srt as a separate file for players that cannot play the embedded sub
         curl -A 'Mozilla/5.0' -S -L --retry 2 -o "$sub_file" "$sub_dl" || { echo -e "${C_FAIL}[!] Unable to download srt.${C_END}"; wait_ack; } 
         # show progress stats so there is feedback on what's happening
-        "$FFMPEG_PATH" -loglevel "$FFMPEG_LOGLEVEL" -stats -timeout 10000000 -rw_timeout 10000000 -reconnect 1 -reconnect_streamed 1 -reconnect_streamed 1 -i "$video_dl" -i "$sub_dl" -c:v copy -c:a copy -c:s mov_text -disposition:s:0 default -bsf:a aac_adtstoasc -f 'mp4' "$video_file"
+        "$FFMPEG_PATH" -loglevel "$FFMPEG_LOGLEVEL" -stats -timeout 10000000 -reconnect 1 -reconnect_streamed 1 -reconnect_streamed 1 -i "$video_dl" -i "$sub_dl" -c:v copy -c:a copy -c:s mov_text -disposition:s:0 default -bsf:a aac_adtstoasc -f 'mp4' "$video_file"
     fi
 }
 

@@ -67,10 +67,9 @@ if [ -z $dcode ]; then
     exit 1
 fi
 
-echo -e "Choose a ${C_OKBLUE}Resolution${C_END} (enter the option number)":
-select resolution in '1080p' '720p' '480p' '360p'; do
-    break;
-done
+echo -e "The resolution must be available on the video page. Please check before entering."
+echo -e -n "Enter ${C_OKBLUE}Resolution${C_END} (ex: 1080p, 720p, 480p, 360p): "
+read resolution
 
 echo -e "Choose a ${C_OKBLUE}File Format${C_END} (enter the option number)":
 select ext in 'mkv' 'mp4'; do

@@ -19,6 +19,7 @@
 #
 
 # Current working dir
+SCRIPT_VERSION='1.0.0'
 CWD=`pwd`
 DOWNLOAD_FOLDER="$CWD/downloads"
 SCRIPT_PATH=`dirname "$0"`
@@ -56,6 +57,7 @@ wait_ack; }
 echo -e "${C_OKGREEN}[i]${C_END} Using FFMPEG path: $FFMPEG_PATH 
 $("$FFMPEG_PATH" -version | head -n 1)
 
+${C_OKGREEN}kdrama_dl.command: version $SCRIPT_VERSION${C_END}
 ${C_BOLD}To exit/abort the script at any time, enter ${C_WARNING}[CONTROL+C].${C_END}
 --------------------------------------------------------"
 
@@ -100,7 +102,7 @@ function do_download {
     if [ "$ext" = 'mkv' ]
     then
         # show progress stats so there is feedback on what's happening
-        "$FFMPEG_PATH" -loglevel "$FFMPEG_LOGLEVEL" -stats -timeout 10 -reconnect 1 -reconnect_streamed 1 -reconnect_streamed 1 -i "$video_dl" -i "$sub_dl" -c copy -bsf:a aac_adtstoasc -f 'matroska' "$video_file"
+        "$FFMPEG_PATH" -loglevel "$FFMPEG_LOGLEVEL" -stats -timeout 10000000 -reconnect 1 -reconnect_streamed 1 -i "$video_dl" -i "$sub_dl" -c copy -bsf:a aac_adtstoasc -f 'matroska' "$video_file"
     fi
 
     if [ "$ext" = 'mp4' ]
@@ -108,7 +110,7 @@ function do_download {
         # Generate srt as a separate file for players that cannot play the embedded sub
         curl -A 'Mozilla/5.0' -S -L --retry 2 -o "$sub_file" "$sub_dl" || { echo -e "${C_FAIL}[!] Unable to download srt.${C_END}"; wait_ack; } 
         # show progress stats so there is feedback on what's happening
-        "$FFMPEG_PATH" -loglevel "$FFMPEG_LOGLEVEL" -stats -timeout 10 -reconnect 1 -reconnect_streamed 1 -reconnect_streamed 1 -i "$video_dl" -i "$sub_dl" -c:v copy -c:a copy -c:s mov_text -disposition:s:0 default -bsf:a aac_adtstoasc -f 'mp4' "$video_file"
+        "$FFMPEG_PATH" -loglevel "$FFMPEG_LOGLEVEL" -stats -timeout 10000000 -reconnect 1 -reconnect_streamed 1 -i "$video_dl" -i "$sub_dl" -c:v copy -c:a copy -c:s mov_text -disposition:s:0 default -bsf:a aac_adtstoasc -f 'mp4' "$video_file"
     fi
 }
 

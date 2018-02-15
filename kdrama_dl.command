@@ -73,10 +73,20 @@ echo -e "The resolution must be available on the video page. Please check before
 echo -e -n "Enter ${C_OKBLUE}Resolution${C_END} (ex: 1080p, 720p, 480p, 360p): "
 read resolution
 
+if [ -z $resolution ]; then
+    echo -e "${C_FAIL}[!] Resolution cannot be blank.${C_END}"
+    exit 1
+fi
+
 echo -e "Choose a ${C_OKBLUE}File Format${C_END} (enter the option number)":
 select ext in 'mkv' 'mp4'; do
     break;
 done
+
+if [ -z $ext ]; then
+    echo -e "${C_FAIL}[!] File Format cannot be blank. Please make sure you enter the option NUMBER.${C_END}"
+    exit 1
+fi
 
 echo -e -n "Enter ${C_OKBLUE}Filename${C_END}: "
 read filename

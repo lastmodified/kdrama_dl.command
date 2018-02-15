@@ -29,7 +29,7 @@ function wait_ack {
     exit
 }
 
-function download_install_launcher {
+function download_ffmpeg {
     echo "Downloading FFMPEG $DMG_LINK ..."
     curl -L --fail -o "$SCRIPT_PATH/ffmpeg.dmg" "$DMG_LINK" || \
     { echo '*** FFMPEG download failed'; wait_ack; }
@@ -43,6 +43,6 @@ function download_install_launcher {
 { FFMPEG_PATH="$SCRIPT_PATH/ffmpeg"; "$FFMPEG_PATH" -version >/dev/null 2>&1 && \
 echo "ffmpeg found at $FFMPEG_PATH"; } || \
 { FFMPEG_PATH="ffmpeg"; "$FFMPEG_PATH" -version >/dev/null 2>&1 && \
-echo "ffmpeg found at $(which ffmpeg)"; } || download_install_launcher
+echo "ffmpeg found at $(which ffmpeg)"; } || download_ffmpeg
 
 wait_ack

@@ -132,9 +132,9 @@ function do_download {
 for i in {1..2}
 do
     do_download
-    if [ -f "$video_dl" ]
+    if [ -f "$video_file" ]
     then
-        echo -e "Download completed: ${C_BOLD}$video_dl${C_END}"
+        echo -e "Download completed: ${C_BOLD}$video_file${C_END}"
         break
     else
         echo -e "${C_FAIL}[!] Unable to complete download.${C_END}"

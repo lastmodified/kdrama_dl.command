@@ -96,7 +96,7 @@ fi
 echo -e -n "Enter ${C_OKBLUE}Filename${C_END}: "
 read filename
 
-if [ -z $filename ]; then
+if [ -z "$filename" ]; then
     echo -e "${C_FAIL}[!] Filename cannot be blank.${C_END}"
     exit 1
 fi

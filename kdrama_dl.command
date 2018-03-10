@@ -19,7 +19,7 @@
 #
 
 # Current working dir
-SCRIPT_VERSION='1.0.0'
+SCRIPT_VERSION='1.0.1'
 CWD=`pwd`
 DOWNLOAD_FOLDER="$CWD/downloads"
 SCRIPT_PATH=`dirname "$0"`
@@ -42,6 +42,14 @@ function wait_ack {
 
 # Trap CONTROL-C interrupt so that we can exit properly without retrying
 trap '{ echo -e "\n${C_FAIL}Interrupt detected. Download aborted.${C_END}" ; wait_ack; }' INT
+
+# Check for update
+latest_hash=$(curl -sL 'https://raw.githubusercontent.com/lastmodified/kdrama_dl.command/master/kdrama_dl.command' | md5 -q)
+current_hash=$(md5 -q "$SCRIPT_PATH/kdrama_dl.command")
+
+if [ "$latest_hash" != "$current_hash" ]; then
+    echo -e "*** A new downloader script version is available. Please reinstall from https://github.com/lastmodified/kdrama_dl.command ***"
+fi
 
 # Test for the correct ffmpeg path, so user can either use an in-folder binary,
 # or a fully installed copy of ffmpeg that is accessible in path
